@@ -24,3 +24,15 @@ if ($LASTEXITCODE -eq 0) {
 
 مرورگر را با Ctrl+F5 تازه کنید. پیش‌نمایش: [داشبورد](previews/dashboard.png)، [موبایل](previews/mobile.png)، [ورود](previews/login.png).
 فایل ZIP کامل پروژه نیز به‌روز شده است. مجوز MIT پروژه شامل فونت‌های ثالث نمی‌شود؛ جزئیات در مستندات بسته است.
+
+## رفع 502 پس از به‌روزرسانی API
+[دانلود بسته کوچک اصلاح اتصال پراکسی](https://github.com/zeynabkhorshidi/Agent1/raw/refs/heads/main/releases/sayesaman-proxy-update.zip)
+
+محتوا را داخل پوشه پروژه استخراج و فایل‌های هم‌نام را جایگزین کنید. وقتی API سالم و روشن است، در همان پوشه اجرا کنید:
+
+```powershell
+docker compose up -d --no-deps --no-build --force-recreate --wait web
+```
+
+Nginx اکنون آدرس API را از DNS داخلی Docker دوباره resolve می‌کند. healthcheck وب نیز مسیر کامل تا API را بررسی می‌کند. آزمون تغییر واقعی IP در کانتینرهای ایزوله، بدون restart شدن Nginx، موفق بود.
+برای رفع فوری روی نسخه قدیمی: `docker compose restart web`.
